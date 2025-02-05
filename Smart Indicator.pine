@@ -1,0 +1,39 @@
+// This Pine Script™ code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © nilupulsayuranga17845
+
+//@version=5
+indicator("Nilpul Sayuranga", overlay=true)
+
+// Input settings
+fastLength = input(9, title="Fast MA Length")
+slowLength = input(21, title="Slow MA Length")
+rsiLength = input(14, title="RSI Length")
+macdFast = input(12, title="MACD Fast Length")
+macdSlow = input(26, title="MACD Slow Length")
+macdSignal = input(9, title="MACD Signal Length")
+atrLength = input(14, title="ATR Length")
+fibMultiplier = input(1.618, title="Fibonacci Multiplier")
+
+// Indicators Calculation
+fastMA = ta.sma(close, fastLength)
+slowMA = ta.sma(close, slowLength)
+rsi = ta.rsi(close, rsiLength)
+[macdLine, signalLine, _] = ta.macd(close, macdFast, macdSlow, macdSignal)
+atrValue = ta.atr(atrLength)
+
+// Buy/Sell Conditions
+buyCondition = ta.crossover(fastMA, slowMA) and rsi > 50 and macdLine > signalLine
+sellCondition = ta.crossunder(fastMA, slowMA) and rsi < 50 and macdLine < signalLine
+
+// SL & TP Calculation
+slBuy = close - (atrValue * fibMultiplier)
+tpBuy = close + (atrValue * fibMultiplier * 2)
+slSell = close + (atrValue * fibMultiplier)
+tpSell = close - (atrValue * fibMultiplier * 2)
+
+// Plot Buy/Sell Labels
+label_color = color.white
+if buyCondition
+    label.new(bar_index, close, "BUY\nEntry: " + str.tostring(close) + "\nSL: " + str.tostring(slBuy) + "\nTP: " + str.tostring(tpBuy), color=color.green, textcolor=label_color, style=label.style_label_down, size=size.small)
+if sellCondition
+    label.new(bar_index, close, "SELL\nEntry: " + str.tostring(close) + "\nSL: " + str.tostring(slSell) + "\nTP: " + str.tostring(tpSell), color=color.red, textcolor=label_color, style=label.style_label_up, size=size.small)
