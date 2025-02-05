@@ -14,8 +14,10 @@ A powerful and easy-to-use TradingView indicator that combines multiple technica
 - **Sell Signal** – Fast MA crosses below Slow MA + RSI below 50 + MACD bearish crossover
 - **SL/TP Levels** – Calculated dynamically using ATR x Fibonacci multiplier
 
+🚀 **Boost your trading confidence with this smart indicator!**
+
 ## Installation
-1. Copy the Pine Script code from the `.pine` file (located [here](link_to_your_file)) and open it in the TradingView Pine Script editor.
+1. Copy the Pine Script code and open it in the TradingView Pine Script editor.
 2. Paste the code into the editor and click **Add to Chart**.
 
 ## Usage
@@ -26,5 +28,3 @@ A powerful and easy-to-use TradingView indicator that combines multiple technica
 
 ## Contributing
 Feel free to contribute to the project! Fork the repository, create a new branch for your feature, and submit a pull request.
-
-🚀 **Boost your trading confidence with this smart indicator!**
